@@ -46,4 +46,5 @@ Thumbs.db
 /e2e/*.map
 
 package-lock.json
+.cache/
 
