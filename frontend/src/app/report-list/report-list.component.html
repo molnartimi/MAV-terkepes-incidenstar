@@ -1,0 +1,8 @@
+<div>
+  <h3>Talált incidensek</h3>
+  <ul>
+    <li *ngFor="let report of reports | async">
+      {{report.title}}
+    </li>
+  </ul>
+</div>

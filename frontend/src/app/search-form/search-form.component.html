@@ -1,0 +1,21 @@
+<form #f="ngForm" (ngSubmit)="search()" class="container">
+  <div class="input-holder">
+    <input type="radio" name="search-type" [value]="0" [(ngModel)]="type">Keresés állomásra<br>
+    <input type="radio" name="search-type" [value]="1" [(ngModel)]="type">Keresés útvonalra<br>
+  </div>
+  <div *ngIf="type == 0" class="input-holder row">
+    <app-search-input [label]="'Állomás'" [valueList]="stations" class="col col-sm-12 col-md-4"></app-search-input>
+  </div>
+  <div *ngIf="type == 1" class="input-holder row">
+    <app-search-input [label]="'Honnan'" [valueList]="stations" class="col col-sm-12 col-md-4"></app-search-input>
+    <app-search-input [label]="'Hova'" [valueList]="stations" class="col col-sm-12 col-md-4"></app-search-input>
+  </div>
+  <div class="input-holder row">
+    <label for="fromDate" class="col col-sm-2 col-md-1">Mettől</label>
+    <input type="date" id="fromDate" class="col col-sm-4 col-md-2">
+    <label for="toDate" class="col col-sm-2 col-md-1">Meddig</label>
+    <input type="date" id="toDate" class="col col-sm-4 col-md-2">
+  </div>
+
+  <button class="btn">Keresés</button>
+</form>
