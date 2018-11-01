@@ -11,4 +11,6 @@ import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.model.RailwayStop;
 public interface RailwayStopRepository extends JpaRepository<RailwayStop, Integer> {
 	@Override
 	List<RailwayStop> findAll();
+	
+	RailwayStop findOneByGeoId(Integer geoId);
 }

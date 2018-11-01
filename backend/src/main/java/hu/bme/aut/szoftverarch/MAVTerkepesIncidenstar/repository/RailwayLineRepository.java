@@ -11,4 +11,6 @@ import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.model.RailwayLine;
 public interface RailwayLineRepository extends JpaRepository<RailwayLine, Integer> {
 	@Override
 	List<RailwayLine> findAll();
+	
+	RailwayLine findOneById(String id);
 }
