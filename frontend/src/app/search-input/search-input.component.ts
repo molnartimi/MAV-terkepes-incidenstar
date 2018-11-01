@@ -27,13 +27,13 @@ export class SearchInputComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.filteredList(term.trim())),
+      switchMap((term: string) => of(this.filteredList(term.trim())))
     );
   }
 
-  filteredList(term: string): Observable<Searchable[]> {
-    return of(this.valueList.filter(value =>
-      term && value.name.toLowerCase().indexOf(term.trim().toLowerCase()) >= 0));
+  filteredList(term: string): Searchable[] {
+    return this.valueList.filter(value =>
+      term && value.name.toLowerCase().indexOf(term.trim().toLowerCase()) >= 0);
   }
 
   findMatches(term: string) {

@@ -20,9 +20,9 @@ export class RsApiService {
   ];
 
   MOCK_REPORTS = [
-    new Report('Valami baj történt itt', '1', new Date()),
-    new Report('Megint lerobbant egy vonat', '2', new Date()),
-    new Report('Ez nem is hiba, csak nem jól szűrtük ki!', '3', new Date())
+    new Report('Valami baj történt itt', '1', new Date(), 47.5005, 19.0831, 'Nagykanizsa'),
+    new Report('Megint lerobbant egy vonat', '2', new Date(), 46.45, 16.9833, 'Budapest-Keleti'),
+    new Report('Ez nem is hiba, csak nem jól szűrtük ki!', '3', new Date(), 46.0667, 18.2333, 'Pécs')
   ];
 
   constructor(private http: HttpClient) {}
