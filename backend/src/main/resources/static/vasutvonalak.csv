@@ -1,0 +1,115 @@
+id;nev
+1;Budapest - Hegyeshalom - Bruck-Királyhida
+2;Budapest-Esztergom
+4;Esztergom-Komárom
+5;Székesfehérvár-Komárom
+8;Győr-Sopron-Ebenfurth
+9;Fertőszentmiklós-Pomogy-Nezsider
+10;Győr-Celldömölk
+11;Győr-Veszprém
+12;Felsőgalla-Tatabánya- Oroszlány
+14;Pápa-Csorna
+15;Sopron-Szombathely
+16;Pozsony-Rajka-Hegyeshalom-Szombathely
+17;Szombathely-Nagykanizsa
+18;Szombathely-Kőszeg
+20;Székesfehérvár-Szombathely
+21;Szombathely-Szentgotthárd-Gyanafalva
+23;Zalaegerszeg-Rédics-Lendva-Csáktornya
+25;Celldömölk-Boba-Ukk- Zalaegerszeg-Bajánsenye-Muraszombat-Murahely
+26;Tapolca-Ukk
+29;Székesfehérvár-Tapolca
+30;Budapest-Székesfehérvár- Nagykanizsa
+30b;Balatonszentgyörgy-Tapolca
+35;Kaposvár-Siófok
+36;Kaposvár-Fonyód
+37;Somogyszob- Balatonszentgyörgy
+38;Nagyatád-Somogyszob
+40;Budapest-Pusztaszabolcs- Pécs
+41;Dombóvár-Gyékényes
+42;Pusztaszabolcs- Dunaújváros-Paks
+43;Mezőfalva-Rétszilas
+44;Pusztaszabolcs-Székesfehérvár
+45;Sárbogárd-Székesfehérvár
+46;Sárbogárd-Bátaszék
+47;Dombóvár-Komló
+50;Dombóvár-Bátaszék
+60;Nagykanizsa-Pécs
+61;Sellye-Szentlőrinc
+64;Pécs-Bátaszék
+65;Pécs-Mohács
+66;Villány-Magyarbóly-Pélmonostor-Eszék
+70;Budapest-Szob-Párkánynána
+71;Budapest-Vácrátót-Vác
+75;Vác-Balassagyarmat
+77;Aszód-Galgamácsa-Vácrátót
+78;Aszód-Balassagyarmat- Ipolytarnóc-Losonc
+80;Budapest-Hatvan- Miskolc-Sátoraljaújhely
+81;Hatvan-Somoskőújfalu-Fülek
+82;Hatvan-Szolnok
+85;Vámosgyörk-Gyöngyös
+86;Vámosgyörk-Újszász-Szolnok
+87a;Füzesabony-Eger
+87;Eger-Putnok
+89;Tiszapalkonya-Erőmű - Tiszaújváros - Miskolc
+90;Miskolc-Hidasnémeti-Kassa
+92;Miskolc-Bánréve-Ózd
+94;Miskolc-Tornanádaska-Torna-Szepsi
+98;Szerencs-Hidasnémeti
+100;Budapest-Szolnok- Debrecen-Nyíregyháza
+100b;Nyíregyháza-Záhony-Csap
+100c;Szerencs-Nyíregyháza
+101;Püspökladány-Biharkeresztes-Nagyvárad
+102;Kál-Kápolna - Kisújszállás
+103;Karcag-Tiszafüred
+105;Debrecen-Nyírábrány-Érmihályfalva
+106;Debrecen-Sáránd-Nagykereki-Nagyvárad
+107;Debrecen-Sáránd-Létavértes
+108;Debrecen-Füzesabony
+109;Debrecen-Tiszalök
+110;Debrecen-Nyírbátor- Mátészalka
+111;Mátészalka-Záhony
+113;Nyíregyháza-Mátészalka-Zajta-Szatmárnémeti
+114;Mátészalka-Csenger-Szatmárnémeti
+115;Mátészalka-Tiborszállás-Nagykároly
+116;Vásárosnamény-Nyíregyháza
+117;Ohat-Pusztakócs - Nyíregyháza
+120;Budapest-Szolnok- Békéscsaba-Lőkösháza-Arad
+121;Békéscsaba-Kétegyháza- Mezőhegyes-Újszeged
+125;Mezőtúr-Orosháza-Mezőhegyes
+125a;Mezőhegyes-Battonya-Ópécska
+126;Kisszénás-Kondoros
+127;Gyoma-Vésztő- Körösnagyharsány-Nagyvárad
+128;Békéscsaba-Kötegyán- Vésztő-Püspökladány
+130;Szolnok-Hódmezővásárhely-Makó
+135;Szeged-Békéscsaba
+140;Cegléd-Szeged
+142;Budapest-Lajosmizse- Kecskemét
+145;Szolnok-Kiskunfélegyháza
+146;Kecskemét-Kunszentmárton
+147;Kiskunfélegyháza- Orosháza
+150;Budapest - Kunszentmiklós-Tass - Kelebia - Szabadka
+154;Bátaszék-Baja-Kiskunhalas
+155;Kiskunhalas- Kiskunfélegyháza
+226L;Uzsa-Uzsabánya
+229o;Balatonfűzfő - Vilonya-Királyszentistván
+250;Batthyány tér-Szentendre
+252;Vágóhíd-Ráckeve
+253;Örs vezér tere-Cinkota-Gödöllő
+253a;Cinkota-Csömör
+304;Széchenyihegy-Hűvösvölgy
+418;Nyíregyháza NyK - Balsai Tisza-part
+419;Nyíregyháza NyK - Dombrád
+504;Sopron-Bécsújhely
+508;Sopron-Felsőlászló
+635;Komárom-Révkomárom-Érsekújvár
+665;Bánréve-Sajólénártfalva-Feled-Fülek
+688;Kassa-Abos-Eperjes-Orló
+690;Sátoraljaújhely-Perbenyik-Csap-Bátyu-Munkács-Kisszolyva
+691;Sátoraljaújhely-Legenyemihályi-Tőketerebes-Homonna-Mezőlaborc
+720;Arad-Máriaradna-Marosillye-Piski-Alvincz-Tövis
+730;Kolozsvár-Székelykocsárd-Tövis-Kiskapus-Segesvár-Brassó-Predeal
+790;Szeged-Valkány-Nagykikinda-Zsombolya-Temesvár-Lugos-Karánsebes-Orsova
+830;Szabadka-Újverbász-Újvidék-India-Zimony
+835;Szeged-Csóka-Karlova
+9001;Bátaszék-Mohács
