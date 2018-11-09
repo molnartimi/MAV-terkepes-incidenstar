@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of, Subject} from 'rxjs';
 import {Station} from '../dto/station';
-import {Report} from '../dto/report';
+import {Report, ReportsForStation} from '../dto/reportsForStation';
+import {ReportService} from './report.service';
 
 @Injectable()
 export class RsApiService {
@@ -10,22 +11,26 @@ export class RsApiService {
   private stationsAPI = 'api/stations';
   private reportAPI = 'api/reports';
 
-  public reportSubject = new Subject<Report[]>();
-
   MOCK_STATIONS = [
-    new Station('Budapest-Keleti', '1'),
-    new Station('Nagykanizsa', '2'),
-    new Station('Pécs', '3'),
-    new Station('Keszthely', '4')
+    new Station('1', 'Budapest-Keleti', 16.9833, 46.45 ),
+    new Station('2', 'Nagykanizsa', 19.0831, 47.5005),
+    new Station('3', 'Pécs', 18.2333, 46.0667),
+    new Station('4', 'Keszthely', 17.2667, 46.7667)
   ];
 
   MOCK_REPORTS = [
-    new Report('Valami baj történt itt', '1', new Date(), 47.5005, 19.0831, 'Nagykanizsa'),
-    new Report('Megint lerobbant egy vonat', '2', new Date(), 46.45, 16.9833, 'Budapest-Keleti'),
-    new Report('Ez nem is hiba, csak nem jól szűrtük ki!', '3', new Date(), 46.0667, 18.2333, 'Pécs')
+    new ReportsForStation(this.MOCK_STATIONS[0],
+      [new Report('20', new Date(), 'Valami baj történt itt'),
+              new Report('21', new Date(), 'Sok itt a baleset')]),
+    new ReportsForStation(this.MOCK_STATIONS[1],
+      [new Report('23', new Date(), 'Megint lerobbant egy vonat')]),
+    new ReportsForStation(this.MOCK_STATIONS[2],
+      [new Report('25', new Date(), 'Még egy hiba, jajj'),
+        new Report('26', new Date(), 'Elütöttek egy bogarat'),
+        new Report('27', new Date(), 'Felsővezetékszakadás')])
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private reportService: ReportService) {}
 
   getStations(): Observable<Station[]> {
     // TODO remove MOCK if valid data is available
@@ -35,7 +40,7 @@ export class RsApiService {
 
   getReports(): void {
     // TODO get reports for station or path
-    this.reportSubject.next(this.MOCK_REPORTS);
-    // return this.http.get<Report[]>(this.reportAPI);
+    this.reportService.allReportsSubject.next(this.MOCK_REPORTS);
+    // return this.http.get<ReportsForStation[]>(this.reportAPI);
   }
 }

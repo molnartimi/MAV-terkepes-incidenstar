@@ -1,6 +1,6 @@
 export class Station implements Searchable {
-  constructor(public name: string, public id: string) {
-    this.name = name;
-    this.id = id;
-  }
+  constructor(public id: string,
+              public name: string,
+              public longitude: number,
+              public latitude: number) {}
 }

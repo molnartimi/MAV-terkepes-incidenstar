@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchInputComponent } from './search-input/search-input.component';
 import {ReportListComponent} from './report-list/report-list.component';
+import {ReportService} from './common/service/report.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ReportListComponent} from './report-list/report-list.component';
     HttpClientModule
   ],
   providers: [
-    RsApiService
+    RsApiService,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import 'ol/ol.css';
-import { Map, View, Tile } from 'ol';
-import { Attribution } from 'ol/control';
+import {Component, OnInit} from '@angular/core';
+import {Map, View, Tile} from 'ol';
+import {Attribution} from 'ol/control';
+import {fromLonLat, transform} from 'ol/proj';
+import {XYZ} from 'ol/source';
+import {Point} from 'ol/geom';
+import {ReportsForStation} from '../common/dto/reportsForStation';
+import {Observable} from 'rxjs';
+import {ReportService} from '../common/service/report.service';
+import {click} from 'ol/events/condition';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -9,13 +16,7 @@ import Feature from 'ol/Feature';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
-import { fromLonLat, transform } from 'ol/proj';
-import { XYZ } from 'ol/source';
-import { Point } from 'ol/geom';
-import {Report} from '../common/dto/report';
-import {Observable, of} from 'rxjs';
-import {RsApiService} from '../common/service/rs-api.service';
-import {switchMap} from 'rxjs/internal/operators';
+import Select from 'ol/interaction/Select';
 
 @Component({
   selector: 'app-map-component',
@@ -26,23 +27,20 @@ export class GeoMapComponent implements OnInit {
 
   MOCenter = [19.3599821729, 47.0581535133];
   vectorLayer: VectorLayer;
-  reports: Observable<Report[]>;
+  reports: Observable<ReportsForStation[]>;
   map: Map;
 
-  constructor(private rsApiService: RsApiService) {}
+  constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
-    this.vectorLayer = this.createPinVectorLayer(
-      [new Report('First', '100', new Date(), this.MOCenter[1], this.MOCenter[0], 'Center')]);
+    this.vectorLayer = this.createPinVectorLayer([]);
     this.map = this.initMap();
+    this.setOnClickListener();
 
-    // TODO update not triggered :(
-    this.reports = this.rsApiService.reportSubject.pipe(
-      switchMap((reports: Report[]) => {
+    this.reportService.allReportsSubject.subscribe(((reports: ReportsForStation[]) => {
         this.map.removeLayer(this.vectorLayer);
         this.vectorLayer = this.createPinVectorLayer(reports);
         this.map.addLayer(this.vectorLayer);
-        return of(reports);
       })
     );
   }
@@ -85,13 +83,14 @@ export class GeoMapComponent implements OnInit {
     });
   }
 
-  private createPinVectorLayer(reports: Report[]): VectorLayer {
+  private createPinVectorLayer(reports: ReportsForStation[]): VectorLayer {
     let vectorSource = new VectorSource();
     for (let report of reports) {
       let iconFeature = new Feature({
-        geometry: new Point(transform([report.longitude, report.latitude], 'EPSG:4326',   'EPSG:3857')),
+        geometry: new Point(transform([report.station.longitude, report.station.latitude], 'EPSG:4326',   'EPSG:3857')),
         name: report.station
       });
+      iconFeature.reportList = report;
       vectorSource.addFeature(iconFeature);
     }
     const iconStyle = new Style({
@@ -100,9 +99,17 @@ export class GeoMapComponent implements OnInit {
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         opacity: 0.75,
-        src: 'http://openlayers.org/en/v3.9.0/examples/data/icon.png'
+        src: 'http://openlayers.org/en/latest/examples/data/icon.png'
       }))
     });
     return new VectorLayer({source: vectorSource, style: iconStyle});
+  }
+
+  private setOnClickListener(): void {
+    let selectClick = new Select({
+      condition: click
+    });
+    this.map.addInteraction(selectClick);
+    selectClick.on('select', (e => this.reportService.stationSelectedSubject.next(e.selected[0].reportList)));
   }
 }
