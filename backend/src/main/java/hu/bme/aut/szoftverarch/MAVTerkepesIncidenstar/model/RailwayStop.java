@@ -1,8 +1,12 @@
 package hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,12 +41,8 @@ public class RailwayStop {
 	@ManyToMany(mappedBy = "railwayStops")
 	private List<RailwayLine> railwayLines = new ArrayList<RailwayLine>();
 	
-	@OneToMany
-	@JoinTable(name = "accessible_stops", 
-			joinColumns = @JoinColumn(name = "from_id", referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "to_id", referencedColumnName = "id"))
-	private List<RailwayStop> accessibleRailwayStops = new ArrayList<RailwayStop>();
-	
-	
-
+	@ElementCollection
+	@CollectionTable(name="routes")
+	@MapKeyColumn(name="id")
+	private Map<RailwayStop, String> routes = new HashMap<RailwayStop, String>();
 }

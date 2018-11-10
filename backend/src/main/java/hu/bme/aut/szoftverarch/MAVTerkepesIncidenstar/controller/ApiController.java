@@ -14,6 +14,10 @@ public class ApiController {
 	@Autowired
 	DbInitService dbInitService;
 	
+	/**
+	 * This mapping constructs the database with values from static resource files.
+	 * Should only be run once.
+	 */
 	@GetMapping("/dbinit")
 	public void init() {			
 		dbInitService.readEntitiesFromFile();

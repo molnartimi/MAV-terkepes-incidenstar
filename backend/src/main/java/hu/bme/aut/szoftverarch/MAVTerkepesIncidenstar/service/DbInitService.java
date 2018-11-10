@@ -25,12 +25,11 @@ public class DbInitService {
 			readRailwayLines();
 			readRailwayStops();
 			bindRailwayStopsToLines();
+			linkStations();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
-
 	
 	private void readRailwayLines() throws FileNotFoundException {
 		Scanner scanner;					
@@ -99,6 +98,13 @@ public class DbInitService {
 		}		
 		
 		scanner.close();
+	}
+	
+	/**
+	 * TODO: add route string with specified target station to RailwayStop.routes 		
+	 */
+	private void linkStations() {
+		
 	}
 
 }
