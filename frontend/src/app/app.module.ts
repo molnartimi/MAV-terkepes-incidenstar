@@ -7,7 +7,6 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { RsApiService } from './common/service/rs-api.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { SearchInputComponent } from './search-input/search-input.component';
 import {ReportListComponent} from './report-list/report-list.component';
 import {ReportService} from './common/service/report.service';
 
@@ -16,7 +15,6 @@ import {ReportService} from './common/service/report.service';
     AppComponent,
     GeoMapComponent,
     SearchFormComponent,
-    SearchInputComponent,
     ReportListComponent
   ],
   imports: [

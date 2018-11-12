@@ -87,7 +87,7 @@ export class GeoMapComponent implements OnInit {
     let vectorSource = new VectorSource();
     for (let report of reports) {
       let iconFeature = new Feature({
-        geometry: new Point(transform([report.station.longitude, report.station.latitude], 'EPSG:4326',   'EPSG:3857')),
+        geometry: new Point(transform([report.longitude, report.latitude], 'EPSG:4326',   'EPSG:3857')),
         name: report.station
       });
       iconFeature.reportList = report;
