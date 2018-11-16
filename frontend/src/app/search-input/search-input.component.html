@@ -1,0 +1,17 @@
+<div id="search-component">
+  <label for="search-box">{{label}}</label>
+  <div class="input-with-result">
+    <input #searchBox id="search-box" (keyup)="findMatches(searchBox.value)" autocomplete="off"
+           name="inputVal" [(ngModel)]="inputValue.name"/>
+    <ul class="search-result" id="result">
+      <li *ngFor="let object of matchedObjects | async" (click)="setValue(object)">
+        {{object.name}}
+      </li>
+    </ul>
+  </div>
+</div>
+<!--
+Copyright 2017-2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

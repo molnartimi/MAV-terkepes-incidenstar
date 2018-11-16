@@ -1,0 +1,3 @@
+interface Searchable {
+  name: string;
+}
