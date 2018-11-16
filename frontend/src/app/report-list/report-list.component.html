@@ -1,0 +1,13 @@
+<div *ngIf="reports">
+  <h3>Incidensek {{reports.station.name}} állomásnál</h3>
+  <table class="table">
+    <tr>
+      <th>Dátum</th>
+      <th>Incidens</th>
+    </tr>
+    <tr *ngFor="let report of reports.reports">
+      <td>{{report.date | date:'yyyy.MM.dd. H:mm'}}</td>
+      <td>{{report.title}}</td>
+    </tr>
+  </table>
+</div>

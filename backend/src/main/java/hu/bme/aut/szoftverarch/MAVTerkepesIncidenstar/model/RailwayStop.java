@@ -40,9 +40,4 @@ public class RailwayStop {
 	
 	@ManyToMany(mappedBy = "railwayStops")
 	private List<RailwayLine> railwayLines = new ArrayList<RailwayLine>();
-	
-	@ElementCollection
-	@CollectionTable(name="routes")
-	@MapKeyColumn(name="id")
-	private Map<RailwayStop, String> routes = new HashMap<RailwayStop, String>();
 }
