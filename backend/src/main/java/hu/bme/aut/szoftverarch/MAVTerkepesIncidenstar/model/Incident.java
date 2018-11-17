@@ -26,6 +26,8 @@ public class Incident {
 	
 	private String title;
 	
+	private String link;
+	
     private Date publicationDate;
 
 	@OneToMany

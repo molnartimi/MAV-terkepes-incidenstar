@@ -11,4 +11,6 @@ import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.model.Incident;
 public interface IncidentRepository extends JpaRepository<Incident, Integer> {
 	@Override
 	List<Incident> findAll();
+	
+	Incident findOneByTitle(String title);
 }
