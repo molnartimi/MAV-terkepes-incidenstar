@@ -27,7 +27,7 @@ public class RssReadComponent implements ApplicationRunner {
 	/**
 	 * Time in milliseconds between two RSS feed reads.
 	 */
-	private static int period = 3600000;
+	private static int period = 1800000;
 	
 	/**
 	 * Schedules an RSS read periodically.
