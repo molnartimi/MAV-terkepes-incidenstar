@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.dto.IncidentInfo;
 import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.dto.SelectStationInfo;
-import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.dto.StationInfo;
 import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.service.DbInitService;
 import hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.service.RailwayStopService;
 
@@ -21,16 +21,20 @@ public class ApiController {
 	DbInitService dbInitService;
 	
 	@Autowired
-	RailwayStopService RailwayStopService;
-	
-	@GetMapping("/getStation/{id}")
-	public StationInfo getStationById(@PathVariable(value = "id") Integer id) {
-		return RailwayStopService.getStation(id);
-	}
+	RailwayStopService railwayStopService;
 	
 	@GetMapping("/getSelectStationInfo")
 	public List<SelectStationInfo> getSelectStationInfo() {
-		return RailwayStopService.getSelectStationInfo();
+		return railwayStopService.getSelectStationInfo();
+	}
+	
+	@GetMapping("getIncidents")
+	public List<IncidentInfo> getIncidents(
+			@RequestParam(value="stationId1", required=true) Integer stationId1,
+			@RequestParam(value="stationId2", required=false) Integer stationId2,
+			@RequestParam(value="fromDate", required=false) String fromDate,
+			@RequestParam(value="toDate", required=false) String toDate) {
+		return railwayStopService.getIncidentInfo(stationId1, stationId2, fromDate, toDate);
 	}
 		
 	/**
@@ -41,6 +45,5 @@ public class ApiController {
 	public void init() {			
 		dbInitService.readEntitiesFromFile();
 	}
-	
 	
 }

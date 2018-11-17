@@ -1,5 +1,6 @@
 package hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ public interface IncidentRepository extends JpaRepository<Incident, Integer> {
 	List<Incident> findAll();
 	
 	Incident findOneByTitle(String title);
+	
+	List<Incident> findByMentionedRailwayStops_IdAndPublicationDateBetween(Integer id, Date from, Date to);
 }
