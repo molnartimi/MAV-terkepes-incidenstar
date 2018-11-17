@@ -82,6 +82,13 @@ public class RssReadService {
 		if (incident.getMentionedRailwayLines().isEmpty()) {
 			incident.getMentionedRailwayLines().addAll(candidates);
 		}
+		for (RailwayLine line : incident.getMentionedRailwayLines()) {
+			for (RailwayStop stop : line.getRailwayStops()) {
+				if (!incident.getMentionedRailwayStops().contains(stop)) {
+					incident.getMentionedRailwayStops().add(stop);
+				}
+			}
+		}
 	}
 
 	/**
