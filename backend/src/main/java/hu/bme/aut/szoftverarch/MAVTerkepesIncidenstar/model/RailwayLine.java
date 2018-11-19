@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,10 +24,9 @@ public class RailwayLine {
 	
 	private String name;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "railway_line_stops",
 			joinColumns = @JoinColumn(name = "railway_line_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "railway_stop_id", referencedColumnName = "id"))
 	private List<RailwayStop> railwayStops = new ArrayList<RailwayStop>();
-
 }

@@ -71,7 +71,9 @@ public class RssReadService {
 			int cnt = 0;
 			for (String city : lineIdentifiers) {
 				if (incident.getTitle().toLowerCase().contains(city)) {
-					candidates.add(line);
+					if (!candidates.contains(line)) {
+						candidates.add(line);						
+					}
 					cnt++;
 				}
 			}

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,13 +31,13 @@ public class Incident {
 	
     private Date publicationDate;
 
-	@OneToMany
+	@ManyToMany
 	@JoinTable(name = "incident_lines", 
 			joinColumns = @JoinColumn(name = "incident_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "railway_line_id", referencedColumnName = "id"))
     private List<RailwayLine> mentionedRailwayLines = new ArrayList<RailwayLine>();
 
-	@OneToMany
+	@ManyToMany
 	@JoinTable(name = "incident_stops", 
 			joinColumns = @JoinColumn(name = "incident_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "railway_stop_id", referencedColumnName = "id"))
