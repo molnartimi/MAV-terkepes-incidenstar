@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchKind} from '../common/enum/search-kind';
 import {RsApiService} from '../common/service/rs-api.service';
-import {Station} from '../common/dto/station';
+import {SelectStationInfo, Station} from '../common/dto/station';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search-form',
@@ -10,16 +11,40 @@ import {Station} from '../common/dto/station';
 })
 export class SearchFormComponent implements OnInit {
   type: number = SearchKind.Station;
-  stations: Station[];
+  needDate = false;
+  stationInfos: SelectStationInfo[];
+
+  station1: SelectStationInfo;
+  station2?: Station;
+  fromDate?: NgbDate;
+  toDate?: NgbDate;
 
   constructor(private rsApiService: RsApiService) {}
 
   ngOnInit(): void {
-    this.rsApiService.getStations().subscribe((stations: Station[]) => this.stations = stations);
+    this.rsApiService.getSelectStationInfo().subscribe((infos: SelectStationInfo[]) => this.stationInfos = infos);
+  }
+
+  showDateBlock(shouldShow: boolean) {
+    if (shouldShow) {
+      const now = new Date();
+      this.toDate = new NgbDate(now.getFullYear(), now.getMonth() + 1, now.getDate());
+      this.fromDate = new NgbDate(now.getFullYear(), now.getMonth() + 1, 1);
+    }
+    this.needDate = shouldShow;
   }
 
   search() {
-    // TODO
-    this.rsApiService.getReports();
+    this.fromDate = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
+    this.toDate = new NgbDate(this.toDate.year, this.toDate.month, this.toDate.day);
+
+    const fromDate = this.fromDate.before(this.toDate) ? this.fromDate : this.toDate;
+    const toDate = this.toDate.after(this.fromDate) ? this.toDate : this.fromDate;
+    this.rsApiService.getReports(
+      this.station1.station.id,
+      this.type === SearchKind.Road ? this.station2.id : '',
+      (this.needDate ? `${fromDate.year}-${fromDate.month}-${fromDate.day}` : null),
+      (this.needDate ? `${toDate.year}-${toDate.month}-${toDate.day}` : null)
+    );
   }
 }

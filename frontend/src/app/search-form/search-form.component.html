@@ -1,20 +1,35 @@
 <form #f="ngForm" (ngSubmit)="search()" class="container">
+
   <div class="input-holder">
     <input type="radio" name="search-type" [value]="0" [(ngModel)]="type">Keresés állomásra<br>
     <input type="radio" name="search-type" [value]="1" [(ngModel)]="type">Keresés útvonalra<br>
   </div>
-  <div *ngIf="type == 0" class="input-holder row">
-    <app-search-input [label]="'Állomás'" [valueList]="stations" class="col col-sm-12 col-md-4"></app-search-input>
-  </div>
-  <div *ngIf="type == 1" class="input-holder row">
-    <app-search-input [label]="'Honnan'" [valueList]="stations" class="col col-sm-12 col-md-4"></app-search-input>
-    <app-search-input [label]="'Hova'" [valueList]="stations" class="col col-sm-12 col-md-4"></app-search-input>
-  </div>
+
   <div class="input-holder row">
-    <label for="fromDate" class="col col-sm-2 col-md-1">Mettől</label>
-    <input type="date" id="fromDate" class="col col-sm-4 col-md-2">
-    <label for="toDate" class="col col-sm-2 col-md-1">Meddig</label>
-    <input type="date" id="toDate" class="col col-sm-4 col-md-2">
+    <label *ngIf="type == 0" class="col col-md-1">Állomás</label>
+    <label *ngIf="type == 1" class="col col-md-1">Honnan</label>
+    <select class="col col-sm-12 col-md-3" [(ngModel)]="station1" name="station1" type="number" required>
+      <option *ngFor="let stationInfo of stationInfos" [ngValue]="stationInfo">{{stationInfo.station.name}}</option>
+    </select>
+
+    <div *ngIf="type == 1">
+      <label class="col col-md-1">Hová</label>
+      <select class="col col-sm-12 col-md-3" [(ngModel)]="station2" name="station2" type="number" required>
+        <option *ngFor="let station of station1.accessibleStations" [ngValue]="station">{{station.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="input-holder">
+      <div *ngIf="needDate" class="btn btn-danger" (click)="showDateBlock(false)">- Időtartomány megadása</div>
+      <div *ngIf="!needDate" class="btn btn-success" (click)="showDateBlock(true)">+ Időtartomány megadása</div>
+  </div>
+
+  <div *ngIf="needDate" class="row input-holder">
+    <label class="col col-sm-2 col-md-1">Mettől</label>
+    <ngb-datepicker #d1 name="fromDate" class="col col-sm-4 col-md-2" [(ngModel)]="fromDate"></ngb-datepicker>
+    <label class="col col-sm-2 col-md-1">Meddig</label>
+    <ngb-datepicker #d2 name="toDate" class="col col-sm-4 col-md-2" [(ngModel)]="toDate"></ngb-datepicker>
   </div>
 
   <button class="btn">Keresés</button>

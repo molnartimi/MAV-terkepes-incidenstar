@@ -1,6 +1,8 @@
 export class Station implements Searchable {
-  constructor(public id: string,
-              public name: string,
-              public longitude: number,
-              public latitude: number) {}
+  constructor(public id: string, public name: string) {}
+}
+
+export class SelectStationInfo {
+  constructor(public station: Station,
+              public accessibleStations: Station[]) {}
 }
