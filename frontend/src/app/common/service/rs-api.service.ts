@@ -7,7 +7,7 @@ import {ReportService} from './report.service';
 
 @Injectable()
 export class RsApiService {
-  private api = 'http://localhost:8080';
+  private api = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient, private reportService: ReportService) {}
 

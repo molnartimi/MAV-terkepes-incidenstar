@@ -14,7 +14,7 @@ export class SearchFormComponent implements OnInit {
   needDate = false;
   stationInfos: SelectStationInfo[];
 
-  station1: SelectStationInfo;
+  station1: SelectStationInfo = new SelectStationInfo(null, []);
   station2?: Station;
   fromDate?: NgbDate;
   toDate?: NgbDate;
@@ -22,7 +22,7 @@ export class SearchFormComponent implements OnInit {
   constructor(private rsApiService: RsApiService) {}
 
   ngOnInit(): void {
-    this.rsApiService.getSelectStationInfo().subscribe((infos: SelectStationInfo[]) => this.stationInfos = infos);
+    this.rsApiService.getSelectStationInfo().subscribe((infos: SelectStationInfo[]) => this.stationInfos = infos.sort((a, b) => a.station.name > b.station.name ? 1 : -1));
   }
 
   showDateBlock(shouldShow: boolean) {
@@ -35,16 +35,24 @@ export class SearchFormComponent implements OnInit {
   }
 
   search() {
-    this.fromDate = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
-    this.toDate = new NgbDate(this.toDate.year, this.toDate.month, this.toDate.day);
+    if (this.needDate) {
+      this.fromDate = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
+      this.toDate = new NgbDate(this.toDate.year, this.toDate.month, this.toDate.day);
+  
+      const fromDate = this.fromDate.before(this.toDate) ? this.fromDate : this.toDate;
+      const toDate = this.toDate.after(this.fromDate) ? this.toDate : this.fromDate;
 
-    const fromDate = this.fromDate.before(this.toDate) ? this.fromDate : this.toDate;
-    const toDate = this.toDate.after(this.fromDate) ? this.toDate : this.fromDate;
-    this.rsApiService.getReports(
-      this.station1.station.id,
-      this.type === SearchKind.Road ? this.station2.id : '',
-      (this.needDate ? `${fromDate.year}-${fromDate.month}-${fromDate.day}` : null),
-      (this.needDate ? `${toDate.year}-${toDate.month}-${toDate.day}` : null)
-    );
+      this.rsApiService.getReports(
+        this.station1.station.id,
+        this.type === SearchKind.Road ? this.station2.id : '',
+        `${fromDate.year}-${fromDate.month}-${fromDate.day}`,
+        `${toDate.year}-${toDate.month}-${toDate.day}`
+      );
+    } else {
+      this.rsApiService.getReports(
+        this.station1.station.id,
+        this.station2 ? this.station2.id : ''
+      );
+    }
   }
 }

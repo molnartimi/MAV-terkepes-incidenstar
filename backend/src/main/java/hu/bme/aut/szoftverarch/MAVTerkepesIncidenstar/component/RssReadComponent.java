@@ -2,6 +2,8 @@ package hu.bme.aut.szoftverarch.MAVTerkepesIncidenstar.component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +56,8 @@ public class RssReadComponent implements ApplicationRunner {
 			for (SyndEntry entry : feed.getEntries()) {
 				rssReadService.addEntry(entry);
 			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println("Last read performed at " + sdf.format(new Date()));
 		} catch (IllegalArgumentException | FeedException | IOException e) {
 			e.printStackTrace();
 		}
