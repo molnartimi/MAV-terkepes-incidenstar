@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchKind} from '../common/enum/search-kind';
 import {RsApiService} from '../common/service/rs-api.service';
 import {SelectStationInfo, Station} from '../common/dto/station';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search-form',
@@ -15,8 +16,8 @@ export class SearchFormComponent implements OnInit {
 
   station1: SelectStationInfo;
   station2?: Station;
-  fromDate: string;
-  toDate: string;
+  fromDate?: NgbDate;
+  toDate?: NgbDate;
 
   constructor(private rsApiService: RsApiService) {}
 
@@ -26,19 +27,24 @@ export class SearchFormComponent implements OnInit {
 
   showDateBlock(shouldShow: boolean) {
     if (shouldShow) {
-      this.toDate = new Date().toLocaleDateString();
-      let fromDate = new Date();
-      fromDate.setFullYear(fromDate.getFullYear() - 1);
-      this.fromDate = fromDate.toLocaleDateString();
+      const now = new Date();
+      this.toDate = new NgbDate(now.getFullYear(), now.getMonth() + 1, now.getDate());
+      this.fromDate = new NgbDate(now.getFullYear(), now.getMonth() + 1, 1);
     }
     this.needDate = shouldShow;
   }
 
   search() {
+    this.fromDate = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
+    this.toDate = new NgbDate(this.toDate.year, this.toDate.month, this.toDate.day);
+
+    const fromDate = this.fromDate.before(this.toDate) ? this.fromDate : this.toDate;
+    const toDate = this.toDate.after(this.fromDate) ? this.toDate : this.fromDate;
     this.rsApiService.getReports(
       this.station1.station.id,
-      this.type === SearchKind.Road ? this.station2.id : ''//,
-      //this.fromDate,
-      //this.toDate);
+      this.type === SearchKind.Road ? this.station2.id : '',
+      (this.needDate ? `${fromDate.year}-${fromDate.month}-${fromDate.day}` : null),
+      (this.needDate ? `${toDate.year}-${toDate.month}-${toDate.day}` : null)
+    );
   }
 }

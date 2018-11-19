@@ -26,10 +26,10 @@
   </div>
 
   <div *ngIf="needDate" class="row input-holder">
-    <label for="fromDate" class="col col-sm-2 col-md-1">Mettől</label>
-    <input type="date" id="fromDate" class="col col-sm-4 col-md-2">
-    <label for="toDate" class="col col-sm-2 col-md-1">Meddig</label>
-    <input type="date" id="toDate" class="col col-sm-4 col-md-2">
+    <label class="col col-sm-2 col-md-1">Mettől</label>
+    <ngb-datepicker #d1 name="fromDate" class="col col-sm-4 col-md-2" [(ngModel)]="fromDate"></ngb-datepicker>
+    <label class="col col-sm-2 col-md-1">Meddig</label>
+    <ngb-datepicker #d2 name="toDate" class="col col-sm-4 col-md-2" [(ngModel)]="toDate"></ngb-datepicker>
   </div>
 
   <button class="btn">Keresés</button>

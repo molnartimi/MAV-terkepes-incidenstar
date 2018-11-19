@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {ReportListComponent} from './report-list/report-list.component';
 import {ReportService} from './common/service/report.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {ReportService} from './common/service/report.service';
     ReportListComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     FormsModule,
     HttpClientModule
