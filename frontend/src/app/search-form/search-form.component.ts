@@ -38,7 +38,7 @@ export class SearchFormComponent implements OnInit {
     if (this.needDate) {
       this.fromDate = new NgbDate(this.fromDate.year, this.fromDate.month, this.fromDate.day);
       this.toDate = new NgbDate(this.toDate.year, this.toDate.month, this.toDate.day);
-  
+
       const fromDate = this.fromDate.before(this.toDate) ? this.fromDate : this.toDate;
       const toDate = this.toDate.after(this.fromDate) ? this.toDate : this.fromDate;
 
@@ -53,6 +53,14 @@ export class SearchFormComponent implements OnInit {
         this.station1.station.id,
         this.station2 ? this.station2.id : ''
       );
+    }
+  }
+
+  public isValid(): boolean {
+    if ((this.station1 && this.station1.station) && (this.type !== SearchKind.Road || this.station2)) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
