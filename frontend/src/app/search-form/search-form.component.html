@@ -1,35 +1,45 @@
-<form #f="ngForm" (ngSubmit)="search()" class="container">
+<form #f="ngForm" (ngSubmit)="search()">
 
   <div class="input-holder">
-    <input type="radio" name="search-type" [value]="0" [(ngModel)]="type">Keresés állomásra<br>
-    <input type="radio" name="search-type" [value]="1" [(ngModel)]="type">Keresés útvonalra<br>
+    <input class="radiobtn" type="radio" name="search-type"  id="rb1"
+           [value]="0" [(ngModel)]="type">
+    <label for="rb1" class="radiobtn-label" [ngClass]="type == 0 ? 'selected' : ''">Keresés állomásra</label>
+    <input class="radiobtn" type="radio" name="search-type" id="rb2"
+           [value]="1" [(ngModel)]="type">
+    <label for="rb2" class="radiobtn-label" [ngClass]="type == 1 ? 'selected' : ''">Keresés útvonalra</label>
   </div>
 
-  <div class="input-holder row">
-    <label *ngIf="type == 0" class="col col-md-1">Állomás</label>
-    <label *ngIf="type == 1" class="col col-md-1">Honnan</label>
-    <select class="col col-sm-12 col-md-3" [(ngModel)]="station1" name="station1" type="number" required>
-      <option *ngFor="let stationInfo of stationInfos" [ngValue]="stationInfo">{{stationInfo.station.name}}</option>
-    </select>
+  <div class="input-holder">
+    <div class="row">
+      <label class="col col-md-2">{{type == 0 ? 'Állomás' : 'Honnan'}}</label>
+      <select class="col col-md-9" [(ngModel)]="station1" name="station1" type="number" required>
+        <option *ngFor="let stationInfo of stationInfos" [ngValue]="stationInfo">{{stationInfo.station.name}}</option>
+      </select>
+    </div>
 
-    <div *ngIf="type == 1">
-      <label class="col col-md-1">Hová</label>
-      <select class="col col-sm-12 col-md-3" [(ngModel)]="station2" name="station2" type="number" required>
+    <div *ngIf="type == 1" class="row">
+      <label class="col col-md-2">Hová</label>
+      <select class="col col-md-9" [(ngModel)]="station2" name="station2" type="number" required>
         <option *ngFor="let station of station1.accessibleStations" [ngValue]="station">{{station.name}}</option>
       </select>
     </div>
   </div>
 
-  <div class="input-holder">
-      <div *ngIf="needDate" class="btn btn-danger" (click)="showDateBlock(false)">- Időtartomány megadása</div>
-      <div *ngIf="!needDate" class="btn btn-success" (click)="showDateBlock(true)">+ Időtartomány megadása</div>
+  <div class="input-holder row">
+    <div class="col col-md-6">
+      <div class="btn" [ngClass]="needDate ? 'btn-danger' : 'btn-success'" (click)="showDateBlock(!needDate)">
+        {{needDate ? "-" : "+"}} Időtartomány megadása
+      </div>
+    </div>
   </div>
 
+  <div *ngIf="needDate" class="row">
+    <label class="col col-md-6">Mettől</label>
+    <label class="col col-md-6">Meddig</label>
+  </div>
   <div *ngIf="needDate" class="row input-holder">
-    <label class="col col-sm-2 col-md-1">Mettől</label>
-    <ngb-datepicker #d1 name="fromDate" class="col col-sm-4 col-md-2" [(ngModel)]="fromDate"></ngb-datepicker>
-    <label class="col col-sm-2 col-md-1">Meddig</label>
-    <ngb-datepicker #d2 name="toDate" class="col col-sm-4 col-md-2" [(ngModel)]="toDate"></ngb-datepicker>
+    <ngb-datepicker #d1 name="fromDate" class="col col-md-6" [(ngModel)]="fromDate"></ngb-datepicker>
+    <ngb-datepicker #d2 name="toDate" class="col col-md-6" [(ngModel)]="toDate"></ngb-datepicker>
   </div>
 
   <button class="btn" [disabled]="!isValid">Keresés</button>
