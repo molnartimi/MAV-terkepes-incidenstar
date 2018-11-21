@@ -56,11 +56,7 @@ export class SearchFormComponent implements OnInit {
     }
   }
 
-  public isValid(): boolean {
-    if ((this.station1 && this.station1.station) && (this.type !== SearchKind.Road || this.station2)) {
-      return true;
-    } else {
-      return false;
-    }
+  get isValid(): boolean {
+    return ((this.station1 && this.station1.station) && (this.type !== SearchKind.Road || !!this.station2));
   }
 }

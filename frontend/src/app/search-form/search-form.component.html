@@ -32,5 +32,5 @@
     <ngb-datepicker #d2 name="toDate" class="col col-sm-4 col-md-2" [(ngModel)]="toDate"></ngb-datepicker>
   </div>
 
-  <button class="btn" disabled="isValid()">Keresés</button>
+  <button class="btn" [disabled]="!isValid">Keresés</button>
 </form>
