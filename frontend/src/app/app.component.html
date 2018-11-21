@@ -1,11 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
+<div class="container">
   <h1>{{ title }}</h1>
-  <app-search-form></app-search-form>
-  <div class="map">
-    <app-map-component></app-map-component>
+  <div class="row">
+    <div class="col col-md-6 col-xs-12">
+      <app-map-component></app-map-component>
+    </div>
+
+    <div class="col col-md-6 row">
+      <div class="row">
+        <div class="col col-md-12">
+          <app-search-form></app-search-form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="report-list col col-md-12">
+          <app-report-list></app-report-list>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="report-list">
-    <app-report-list></app-report-list>
-  </div>
+
 </div>

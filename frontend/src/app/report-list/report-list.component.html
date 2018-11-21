@@ -6,8 +6,8 @@
       <th>Incidens</th>
     </tr>
     <tr *ngFor="let report of reports.reports">
-      <td>{{report.date | date:'yyyy.MM.dd. H:mm'}}</td>
-      <td>{{report.title}}</td>
+      <td>{{report.getDate()}}</td>
+      <td>{{report.title}}<br><a class="link" href="{{report.link}}" target="_blank">Részletek >></a></td>
     </tr>
   </table>
 </div>

@@ -1,3 +1,26 @@
 .input-holder {
   margin-bottom: 20px;
 }
+
+.radiobtn {
+  display: none;
+}
+
+.radiobtn-label {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: #f0f0f0 1px solid;
+  margin-bottom: 0;
+  &.selected {
+    background: #f0f0f0;
+  }
+}
+
+.all-input {
+  background: #f0f0f0;
+  padding: 1em;
+}
+
+::ng-deep ngb-datepicker .bg-primary {
+  background: royalblue !important;
+}

@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SelectStationInfo} from '../dto/station';
-import {ReportsForStation} from '../dto/reportsForStation';
+import {ReportsForStation, Report} from '../dto/reportsForStation';
 import {ReportService} from './report.service';
 
 @Injectable()
 export class RsApiService {
-  private api = 'http://localhost:8080';
+  private api = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient, private reportService: ReportService) {}
 
@@ -20,6 +20,22 @@ export class RsApiService {
       (stationId2 ? `&stationId2=${stationId2}` : '') +
       (fromDate && toDate ? `&fromDate=${fromDate}&toDate=${toDate}` : '');
     this.http.get<ReportsForStation[]>(url)
-      .subscribe(reportList => this.reportService.allReportsSubject.next(reportList));
+      .subscribe(reportList => {
+        let reportStationInfos = [];
+        
+        for (let i in reportList) {
+          let reportInfo = reportList[i];
+          let reportStationInfo = new ReportsForStation(reportInfo.station, reportInfo.longitude, reportInfo.latitude, []);
+          
+          for (let j in reportInfo.reports) {
+            let report = reportInfo.reports[j];
+            reportStationInfo.reports.push(new Report( report.id, report.link, report.publicationDate, report.title));
+          }
+
+          reportStationInfos.push(reportStationInfo);
+        }        
+
+        this.reportService.allReportsSubject.next(reportStationInfos);
+      });
   }
 }

@@ -48,6 +48,7 @@ export class GeoMapComponent implements OnInit {
   private initMap(): Map {
     return new Map({
       target: 'map',
+      controls: [],
       layers: [
         new TileLayer({
           source: new OSM()
@@ -57,7 +58,9 @@ export class GeoMapComponent implements OnInit {
       ],
       view: new View({
         center: fromLonLat(this.MOCenter),
-        zoom: 7
+        zoom: 7,
+        minZoom: 6.5,
+        maxZoom: 12
       })
     });
   }
@@ -67,18 +70,8 @@ export class GeoMapComponent implements OnInit {
       title: 'OpenRailwayMap',
       visible: true,
       source: new XYZ({
-        attributions: [
-          OSM.ATTRIBUTION,
-          new Attribution({
-            html: 'Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a>' +
-            '<a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> and OpenStreetMap'
-          })
-        ],
         url: 'http://{a-c}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png',
-        crossOrigin: null, // make it work inside canvas
-        tilePixelRatio: 2, // server returns 512px img for 256 tiles
-        maxZoom: 19, // XYZ's default is 18
-        opaque: true
+        crossOrigin: null,
       })
     });
   }

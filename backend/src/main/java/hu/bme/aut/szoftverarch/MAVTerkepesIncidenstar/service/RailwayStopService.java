@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,7 +109,9 @@ public class RailwayStopService {
 				}
 			}
 		}
-		return incidentInfos;
+
+		return (List<IncidentInfo>) incidentInfos.stream().filter(incidentInfo -> !incidentInfo.getReports().isEmpty())
+				.collect(Collectors.toList());
 	}
 
 	/**

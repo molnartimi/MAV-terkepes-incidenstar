@@ -4,5 +4,5 @@ export class Station implements Searchable {
 
 export class SelectStationInfo {
   constructor(public station: Station,
-              public accessibleStations: Station[]) {}
+              public accessibleStations: Station[] = []) {}
 }
