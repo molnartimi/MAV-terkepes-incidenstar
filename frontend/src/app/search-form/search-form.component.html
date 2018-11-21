@@ -1,6 +1,6 @@
 <form #f="ngForm" (ngSubmit)="search()">
 
-  <div class="input-holder">
+  <div>
     <input class="radiobtn" type="radio" name="search-type"  id="rb1"
            [value]="0" [(ngModel)]="type">
     <label for="rb1" class="radiobtn-label" [ngClass]="type == 0 ? 'selected' : ''">Keresés állomásra</label>
@@ -9,6 +9,7 @@
     <label for="rb2" class="radiobtn-label" [ngClass]="type == 1 ? 'selected' : ''">Keresés útvonalra</label>
   </div>
 
+  <div class="all-input">
   <div class="input-holder">
     <div class="row">
       <label class="col col-md-2">{{type == 0 ? 'Állomás' : 'Honnan'}}</label>
@@ -42,5 +43,6 @@
     <ngb-datepicker #d2 name="toDate" class="col col-md-6" [(ngModel)]="toDate"></ngb-datepicker>
   </div>
 
-  <button class="btn" [disabled]="!isValid">Keresés</button>
+  <button class="btn btn-info" [disabled]="!isValid">Keresés</button>
+  </div>
 </form>

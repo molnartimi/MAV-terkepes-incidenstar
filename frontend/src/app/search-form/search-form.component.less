@@ -7,12 +7,20 @@
 }
 
 .radiobtn-label {
-  margin-right: 1em;
   cursor: pointer;
   padding: 6px 12px;
-  border: lightgrey 1px solid;
-  border-radius: 4px;
+  border: #f0f0f0 1px solid;
+  margin-bottom: 0;
   &.selected {
-    background: lightgrey;
+    background: #f0f0f0;
   }
+}
+
+.all-input {
+  background: #f0f0f0;
+  padding: 1em;
+}
+
+::ng-deep ngb-datepicker .bg-primary {
+  background: royalblue !important;
 }
