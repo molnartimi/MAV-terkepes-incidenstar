@@ -16,24 +16,26 @@ export class RsApiService {
   }
 
   getReports(stationId1: string, stationId2?: string, fromDate?: string, toDate?: string): void {
+    this.reportService.allReportsSubject.next([]);
+    this.reportService.stationSelectedSubject.next(undefined);
     const url = `${this.api}/getIncidents?stationId1=${stationId1}` +
       (stationId2 ? `&stationId2=${stationId2}` : '') +
       (fromDate && toDate ? `&fromDate=${fromDate}&toDate=${toDate}` : '');
     this.http.get<ReportsForStation[]>(url)
       .subscribe(reportList => {
         let reportStationInfos = [];
-        
+
         for (let i in reportList) {
           let reportInfo = reportList[i];
           let reportStationInfo = new ReportsForStation(reportInfo.station, reportInfo.longitude, reportInfo.latitude, []);
-          
+
           for (let j in reportInfo.reports) {
             let report = reportInfo.reports[j];
             reportStationInfo.reports.push(new Report( report.id, report.link, report.publicationDate, report.title));
           }
 
           reportStationInfos.push(reportStationInfo);
-        }        
+        }
 
         this.reportService.allReportsSubject.next(reportStationInfos);
       });

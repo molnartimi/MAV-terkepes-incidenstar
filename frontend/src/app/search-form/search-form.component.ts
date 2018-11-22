@@ -22,7 +22,12 @@ export class SearchFormComponent implements OnInit {
   constructor(private rsApiService: RsApiService) {}
 
   ngOnInit(): void {
-    this.rsApiService.getSelectStationInfo().subscribe((infos: SelectStationInfo[]) => this.stationInfos = infos.sort((a, b) => a.station.name > b.station.name ? 1 : -1));
+    this.rsApiService.getSelectStationInfo().subscribe((infos: SelectStationInfo[]) => {
+      this.stationInfos = infos.sort((a, b) => a.station.name > b.station.name ? 1 : -1);
+      this.stationInfos.forEach((info: SelectStationInfo) => {
+        info.accessibleStations.sort((a, b) => a.name > b.name ? 1 : -1);
+      });
+    });
   }
 
   showDateBlock(shouldShow: boolean) {
