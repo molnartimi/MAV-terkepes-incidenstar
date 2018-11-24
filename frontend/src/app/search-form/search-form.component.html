@@ -12,15 +12,15 @@
   <div class="all-input">
   <div class="input-holder">
     <div class="row">
-      <label class="col col-md-2">{{type == 0 ? 'Állomás' : 'Honnan'}}</label>
-      <select class="col col-md-9" [(ngModel)]="station1" name="station1" type="number" required>
+      <label class="col col-md-2 col-xs-3">{{type == 0 ? 'Állomás' : 'Honnan'}}</label>
+      <select class="col col-md-9 col-xs-8" [(ngModel)]="station1" name="station1" type="number" required>
         <option *ngFor="let stationInfo of stationInfos" [ngValue]="stationInfo">{{stationInfo.station.name}}</option>
       </select>
     </div>
 
     <div *ngIf="type == 1" class="row">
-      <label class="col col-md-2">Hová</label>
-      <select class="col col-md-9" [(ngModel)]="station2" name="station2" type="number" required>
+      <label class="col col-md-2 col-xs-3">Hová</label>
+      <select class="col col-md-9 col-xs-8" [(ngModel)]="station2" name="station2" type="number" required>
         <option *ngFor="let station of station1.accessibleStations" [ngValue]="station">{{station.name}}</option>
       </select>
     </div>
