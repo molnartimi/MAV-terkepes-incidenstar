@@ -27,7 +27,7 @@
   </div>
 
   <div class="input-holder row">
-    <div class="col col-md-6">
+    <div class="col col-md-6 col-xs-6">
       <div class="btn" [ngClass]="needDate ? 'btn-danger' : 'btn-success'" (click)="showDateBlock(!needDate)">
         {{needDate ? "-" : "+"}} Időtartomány megadása
       </div>
@@ -35,12 +35,12 @@
   </div>
 
   <div *ngIf="needDate" class="row">
-    <label class="col col-md-6">Mettől</label>
-    <label class="col col-md-6">Meddig</label>
+    <label class="col col-md-6 col-xs-6">Mettől</label>
+    <label class="col col-md-6 col-xs-6">Meddig</label>
   </div>
   <div *ngIf="needDate" class="row input-holder">
-    <ngb-datepicker #d1 name="fromDate" class="col col-md-6" [(ngModel)]="fromDate"></ngb-datepicker>
-    <ngb-datepicker #d2 name="toDate" class="col col-md-6" [(ngModel)]="toDate"></ngb-datepicker>
+    <ngb-datepicker #d1 name="fromDate" class="col col-md-6 col-xs-6" [(ngModel)]="fromDate"></ngb-datepicker>
+    <ngb-datepicker #d2 name="toDate" class="col col-md-6 col-xs-6" [(ngModel)]="toDate"></ngb-datepicker>
   </div>
 
   <button class="btn btn-info" [disabled]="!isValid">Keresés</button>
